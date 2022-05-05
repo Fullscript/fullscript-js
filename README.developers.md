@@ -142,10 +142,10 @@ To get things started, please run the following from the root of the project:
 
 Next run the following from the react-demo directory `cd demo/react-demo`:
 
-1. `yarn link fullscript-js`
+1. `yarn link @fullscript/fullscript-js`
 2. `yarn install`
 
-Next you can run the React app:
+Next, you can run the React app from one of the options below:
 
 - `yarn start` (from inside demo/react-demo)
 - `yarn demo:npm` (from the root of the project)
