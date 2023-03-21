@@ -7,7 +7,7 @@ import { createIframe } from "../iframe";
 import { removeChildren } from "../utils";
 
 import { EventType, EventListenerCallback } from "./eventType";
-import { FeatureType, FeatureOptions, Feature } from "./featureType";
+import { FeatureType, FeatureOptions, Feature, WRAPPER_DIV_ID } from "./featureType";
 import { getFeatureURL } from "./featureUtil";
 
 const getFeature = <F extends FeatureType>(
@@ -24,8 +24,11 @@ const getFeature = <F extends FeatureType>(
     const url = await getFeatureURL(featureType, featureOptions, fullscriptOptions, frameId);
     mountPoint = document.getElementById(elementId);
     validateMountPoint(mountPoint);
-    const iframe = createIframe(url);
-    mountPoint.appendChild(iframe);
+
+    if (!mountPoint.querySelector(`#${WRAPPER_DIV_ID}`)) {
+      const iframe = createIframe(url);
+      mountPoint.appendChild(iframe);
+    }
   };
 
   const unmount = () => {

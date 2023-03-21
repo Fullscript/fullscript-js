@@ -4,6 +4,8 @@ const FEATURE_TYPES = {
   treatmentPlan: "treatmentPlan",
 };
 
+const WRAPPER_DIV_ID = "wrapper-div";
+
 type FeatureType = keyof typeof FEATURE_TYPES;
 
 type PatientOptions = {
@@ -37,4 +39,5 @@ export {
   PatientOptions,
   Feature,
   FEATURE_TYPES,
+  WRAPPER_DIV_ID,
 };

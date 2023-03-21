@@ -1,3 +1,5 @@
+import { WRAPPER_DIV_ID } from "../../../feature/featureType";
+
 import * as styles from "./styles";
 
 type DivAttributes = {
@@ -22,7 +24,7 @@ const createDiv = (attributes: DivAttributes): HTMLDivElement => {
 };
 
 const createWrapper = (): HTMLDivElement => {
-  return createDiv({ style: styles.wrapper });
+  return createDiv({ id: WRAPPER_DIV_ID, style: styles.wrapper });
 };
 
 const createLoader = (): HTMLDivElement => {
