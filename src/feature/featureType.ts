@@ -2,6 +2,7 @@ import { EventListenerFunction } from "./eventType";
 
 const FEATURE_TYPES = {
   treatmentPlan: "treatmentPlan",
+  platform: "platform",
 };
 
 type FeatureType = keyof typeof FEATURE_TYPES;
@@ -19,7 +20,7 @@ type PatientOptions = {
 };
 type TreatmentPlanOptions = { patient?: PatientOptions; secretToken: string };
 
-type FeatureOptions<F extends FeatureType> = F extends "treatmentPlan"
+type FeatureOptions<F extends FeatureType> = F extends "treatmentPlan" | "platform"
   ? TreatmentPlanOptions
   : Record<any, never>;
 
