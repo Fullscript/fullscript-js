@@ -1,6 +1,6 @@
-# Fullscript.js Documentation
+# Fullscript Embed Documentation
 
-Please visit [the fullscript.js docs](https://fullscript.dev/docs/how-to-guides/fullscript-js/what-is-fullscript-js) to get started.
+Please visit [the Fullscript Embed docs](https://fullscript.dev/docs/how-to-guides/fullscript-embed/what-is-fullscript-embed) to get started.
 
 ## Demo
 
@@ -8,7 +8,7 @@ In the project directory, we have two demo apps - React demo and UMD demo that y
 
 ### create-react-app demo
 
-The `create-react-app` demo app will use the npm package version of the fullscript-js library. Compared to the CDN version, the npm package version will contain typing information for your IDE and requires a bundler for packaging.
+The `create-react-app` demo app will use the npm package version of the Fullscript Embed library. Compared to the CDN version, the npm package version will contain typing information for your IDE and requires a bundler for packaging.
 
 To get things started, please run the following from the root of the project:
 
@@ -28,7 +28,7 @@ Next you can run the React app using one of the options below:
 
 ### UMD demo
 
-The UMD version of the fullscript-js library is pre-packaged for consumption by browsers. This does not rely on a bundler such as webpack and can be included via a single script tag in any html file. The downside of this version is that you do no benefit from typing information.
+The UMD version of the Fullscript Embed library is pre-packaged for consumption by browsers. This does not rely on a bundler such as webpack and can be included via a single script tag in any html file. The downside of this version is that you do no benefit from typing information.
 
 To run the demo, you need simply run the following from the root of the project:
 
