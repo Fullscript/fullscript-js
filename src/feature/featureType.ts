@@ -5,6 +5,10 @@ const FEATURE_TYPES = {
   platform: "platform",
 };
 
+type Entrypoint = "catalog" | "labs";
+
+const ENTRYPOINTS: Entrypoint[] = ["catalog", "labs"];
+
 type FeatureType = keyof typeof FEATURE_TYPES;
 
 type PatientOptions = {
@@ -19,9 +23,12 @@ type PatientOptions = {
   discount?: number;
 };
 type TreatmentPlanOptions = { patient?: PatientOptions; secretToken: string };
+type PlatformOptions = TreatmentPlanOptions & { entrypoint?: Entrypoint };
 
-type FeatureOptions<F extends FeatureType> = F extends "treatmentPlan" | "platform"
+type FeatureOptions<F extends FeatureType> = F extends "treatmentPlan"
   ? TreatmentPlanOptions
+  : F extends "platform"
+  ? PlatformOptions
   : Record<any, never>;
 
 interface Feature {
@@ -34,8 +41,10 @@ interface Feature {
 export {
   FeatureType,
   FeatureOptions,
+  PlatformOptions,
   TreatmentPlanOptions,
   PatientOptions,
   Feature,
   FEATURE_TYPES,
+  ENTRYPOINTS,
 };
