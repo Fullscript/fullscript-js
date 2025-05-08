@@ -34,7 +34,7 @@ const initializeMocks = () => {
   }));
 };
 
-describe("feature", () => {
+describe("featurea", () => {
   let mockMountPoint;
   let dispatcher: Dispatcher;
   let mockFullscriptOptions: FullscriptOptions;
