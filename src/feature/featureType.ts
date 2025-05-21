@@ -28,8 +28,8 @@ type PlatformOptions = TreatmentPlanOptions & { entrypoint?: Entrypoint };
 type FeatureOptions<F extends FeatureType> = F extends "treatmentPlan"
   ? TreatmentPlanOptions
   : F extends "platform"
-  ? PlatformOptions
-  : Record<any, never>;
+    ? PlatformOptions
+    : Record<any, never>;
 
 interface Feature {
   mount: (elementId: string) => Promise<void>;
