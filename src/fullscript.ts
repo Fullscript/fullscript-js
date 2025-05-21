@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 type FullscriptDomain =
   | "https://ca.fullscript.com"
   | "https://us.fullscript.com"
