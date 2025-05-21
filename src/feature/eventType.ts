@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 const EVENT_TYPES = {
   "treatmentPlan.activated": "treatmentPlan.activated",
   "patient.selected": "patient.selected",

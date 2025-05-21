@@ -33,6 +33,7 @@ const tokenizeData = async (patientInfo, fullscriptOptions) => {
     const tokenizedInfo = await fetch(`${fsDomain}/api/embeddable/tokenize`, {
       method: "POST",
       body: JSON.stringify({ data: patientInfo }),
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: { "Content-Type": "application/json" },
     }).then(res => res.json());
 
