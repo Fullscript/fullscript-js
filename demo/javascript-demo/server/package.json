@@ -11,10 +11,11 @@
   "author": "Team Bifrost @Fullscript",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "socket.io": "^2.3.0"
+    "express": "^4.21.2",
+    "socket.io": "^2.5.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
-  }
+    "nodemon": "^2.0.22"
+  },
+  "packageManager": "yarn@4.9.1"
 }
