@@ -5,4 +5,6 @@ coverage
 bundle_sizes.html
 .eslintcache
 demo/javascript-demo/server/node_modules
+demo/javascript-demo/server/.yarn/*
+demo/react-demo/.yarn/*
 .yarn/*
