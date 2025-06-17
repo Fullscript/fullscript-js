@@ -5,7 +5,7 @@ const createIframe = (src: string): HTMLElement => {
   iframe.style.setProperty("width", "100%");
   iframe.style.setProperty("height", "100%");
   iframe.style.setProperty("border", "none");
-  iframe.allow = "clipboard-read; clipboard-write";
+  iframe.allow = "clipboard-write";
   iframe.src = src;
 
   return wrapWithLoader(iframe);
