@@ -28,4 +28,11 @@ describe("iframe util", () => {
       expect(iframe.style.height).toEqual("100%");
     });
   });
+
+  it("returns an iframe with the allow attribute set to clipboard-read and clipboard-write", () => {
+    return import("./iframe").then(({ createIframe }) => {
+      const iframe = createIframe(mockSrc) as HTMLIFrameElement;
+      expect(iframe.allow).toEqual("clipboard-read; clipboard-write");
+    });
+  });
 });
