@@ -40,7 +40,8 @@
     "test": "yarn install && jest --maxWorkers=2",
     "demo:npm": "yarn --cwd ./demo/react-demo start",
     "demo:umd": "yarn --cwd ./demo/javascript-demo/server dev",
-    "watch": "concurrently \"yarn:watch:*\""
+    "watch": "concurrently \"yarn:watch:*\"",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@babel/cli": "^7.27.2",
