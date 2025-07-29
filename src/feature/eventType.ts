@@ -43,6 +43,16 @@ type TreatmentPlanPayload = {
         additionalInfo: string;
       };
     }[];
+    lab_recommendations: {
+      id: string;
+      name: string;
+      requiresFasting: boolean;
+      instructions: string;
+      tests:{
+        id:string;
+        name:string;
+      }[];
+    }[];
   };
 };
 
