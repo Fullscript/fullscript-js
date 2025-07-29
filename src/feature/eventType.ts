@@ -46,14 +46,14 @@ type TreatmentPlanPayload = {
     }[];
     labRecommendations: {
       id: string;
-      name:string;
+      name: string;
       requiresFasting: boolean;
       instructions: string;
-      tests:{
-        id:string;
+      tests: {
+        id: string;
         name: string;
       }[];
-    }
+    };
   };
 };
 
