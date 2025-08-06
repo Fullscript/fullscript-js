@@ -27,6 +27,9 @@ type TreatmentPlanPayload = {
     state: string;
     patient: {
       id: string;
+      firstNane: string;
+      lastName: string;
+      email: string;
     };
     practitioner: {
       id: string;
