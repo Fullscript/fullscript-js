@@ -41,7 +41,7 @@
     "demo:npm": "yarn --cwd ./demo/react-demo start",
     "demo:umd": "yarn --cwd ./demo/javascript-demo/server dev",
     "watch": "concurrently \"yarn:watch:*\"",
-    "prepare": "husky"
+    "postinstall": "husky"
   },
   "devDependencies": {
     "@babel/cli": "^7.27.2",
