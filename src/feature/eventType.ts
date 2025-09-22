@@ -9,7 +9,7 @@ type EventType = keyof typeof EVENT_TYPES;
 type PatientPayload = {
   patient: {
     id: string;
-    firstNane: string;
+    firstName: string;
     lastName: string;
     email: string;
     dateOfBirth: string;
@@ -27,7 +27,7 @@ type TreatmentPlanPayload = {
     state: string;
     patient: {
       id: string;
-      firstNane: string;
+      firstName: string;
       lastName: string;
       email: string;
     };
