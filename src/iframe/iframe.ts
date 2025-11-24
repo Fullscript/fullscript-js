@@ -7,6 +7,7 @@ const createIframe = (src: string): HTMLElement => {
   iframe.style.setProperty("border", "none");
   iframe.allow = "clipboard-write";
   iframe.src = src;
+  iframe.allow = "local-network-access"
 
   return wrapWithLoader(iframe);
 };
