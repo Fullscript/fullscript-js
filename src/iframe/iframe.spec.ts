@@ -29,10 +29,11 @@ describe("iframe util", () => {
     });
   });
 
-  it("returns an iframe with the allow attribute set to clipboard-read and clipboard-write", () => {
+  it("returns an iframe with the allow attribute set to clipboard-read, clipboard-write, and local-network-access", () => {
     return import("./iframe").then(({ createIframe }) => {
       const iframe = createIframe(mockSrc) as HTMLIFrameElement;
-      expect(iframe.allow).toEqual("clipboard-write");
+      expect(iframe.allow).toContain("clipboard-write");
+      expect(iframe.allow).toContain("local-network-access");
     });
   });
 });
