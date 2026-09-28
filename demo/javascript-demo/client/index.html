@@ -33,6 +33,7 @@
       feature.mount("treatment-plan-iframe");
       feature.on("treatmentPlan.activated", mockCallback);
       feature.on("patient.selected", mockCallback);
+      feature.on("order.checkoutStarted", mockCallback);
     }
 
     function mockCallback(data) {

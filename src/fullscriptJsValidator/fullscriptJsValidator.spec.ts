@@ -72,11 +72,14 @@ describe("fullscriptValidator", () => {
   });
 
   describe("validateFeatureEventType", () => {
-    it("does not throw an error if the featureEventType is valid", () => {
-      expect(() => {
-        validateFeatureEventType("treatmentPlan.activated");
-      }).not.toThrow();
-    });
+    it.each(["treatmentPlan.activated", "patient.selected", "order.checkoutStarted"])(
+      "does not throw an error if the featureEventType is %s",
+      eventType => {
+        expect(() => {
+          validateFeatureEventType(eventType);
+        }).not.toThrow();
+      }
+    );
 
     it("throws an error if the featureEventType is not treatmentPlan or a string", () => {
       const invalidEventType = "cancelled";

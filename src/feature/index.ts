@@ -7,6 +7,7 @@ export type {
   EventListenerPayload,
   TreatmentPlanPayload,
   PatientPayload,
+  OrderPayload,
   EventType,
 } from "./eventType";
 
