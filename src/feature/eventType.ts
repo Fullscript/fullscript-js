@@ -2,6 +2,7 @@
 const EVENT_TYPES = {
   "treatmentPlan.activated": "treatmentPlan.activated",
   "patient.selected": "patient.selected",
+  "order.checkoutStarted": "order.checkoutStarted",
 };
 
 type EventType = keyof typeof EVENT_TYPES;
@@ -60,10 +61,25 @@ type TreatmentPlanPayload = {
   };
 };
 
+type OrderPayload = {
+  order: {
+    id: string;
+    practitionerPay: boolean;
+    treatmentPlan: TreatmentPlanPayload["treatmentPlan"];
+  };
+};
+
+// Indexing with `E` means adding an entry to EVENT_TYPES without one here is a compile error
+type EventPayloads = {
+  "treatmentPlan.activated": TreatmentPlanPayload;
+  "patient.selected": PatientPayload;
+  "order.checkoutStarted": OrderPayload;
+};
+
 type EventListenerPayload<E extends EventType> = {
   id: string;
   type: E;
-  data: E extends "patient.selected" ? PatientPayload : TreatmentPlanPayload;
+  data: EventPayloads[E];
   createdAt: string;
   clinicId: string;
   oauth: {
@@ -84,6 +100,7 @@ export {
   EventListenerPayload,
   TreatmentPlanPayload,
   PatientPayload,
+  OrderPayload,
   EventType,
   EVENT_TYPES,
 };

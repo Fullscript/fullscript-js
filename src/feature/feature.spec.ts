@@ -2,6 +2,7 @@ import { Dispatcher, createDispatcher } from "../eventSystem";
 import { FeatureType } from "../feature";
 import { FullscriptOptions } from "../fullscript";
 
+import { EventType } from "./eventType";
 import { FeatureOptions } from "./featureType";
 
 let mockCreateIframe;
@@ -153,44 +154,54 @@ describe("feature", () => {
   });
 
   describe("dispatcher calls", () => {
-    it("calls registerEventListener on the dispatcher when on is called", () => {
-      return import("./feature").then(({ getFeature }) => {
-        const callback = jest.fn();
-        const eventType = "treatmentPlan.activated";
-        dispatcher.registerEventListener = jest.fn();
-        const feature = getFeature(
-          mockFeatureType,
-          mockFeatureOptions,
-          mockFullscriptOptions,
-          dispatcher
-        );
+    const eventTypes: EventType[] = [
+      "treatmentPlan.activated",
+      "patient.selected",
+      "order.checkoutStarted",
+    ];
 
-        feature.on(eventType, callback);
-        expect(dispatcher.registerEventListener).toHaveBeenCalledWith(
-          `${mockFrameId}.${eventType}`,
-          callback
-        );
-      });
-    });
+    it.each(eventTypes)(
+      "calls registerEventListener on the dispatcher when on is called with %s",
+      eventType => {
+        return import("./feature").then(({ getFeature }) => {
+          const callback = jest.fn();
+          dispatcher.registerEventListener = jest.fn();
+          const feature = getFeature(
+            mockFeatureType,
+            mockFeatureOptions,
+            mockFullscriptOptions,
+            dispatcher
+          );
 
-    it("calls unregisterEventListener on the dispatcher when off is called", () => {
-      return import("./feature").then(({ getFeature }) => {
-        const callback = jest.fn();
-        const eventType = "treatmentPlan.activated";
-        dispatcher.unregisterEventListener = jest.fn();
-        const feature = getFeature(
-          mockFeatureType,
-          mockFeatureOptions,
-          mockFullscriptOptions,
-          dispatcher
-        );
+          feature.on(eventType, callback);
+          expect(dispatcher.registerEventListener).toHaveBeenCalledWith(
+            `${mockFrameId}.${eventType}`,
+            callback
+          );
+        });
+      }
+    );
 
-        feature.off(eventType, callback);
-        expect(dispatcher.unregisterEventListener).toHaveBeenCalledWith(
-          `${mockFrameId}.${eventType}`,
-          callback
-        );
-      });
-    });
+    it.each(eventTypes)(
+      "calls unregisterEventListener on the dispatcher when off is called with %s",
+      eventType => {
+        return import("./feature").then(({ getFeature }) => {
+          const callback = jest.fn();
+          dispatcher.unregisterEventListener = jest.fn();
+          const feature = getFeature(
+            mockFeatureType,
+            mockFeatureOptions,
+            mockFullscriptOptions,
+            dispatcher
+          );
+
+          feature.off(eventType, callback);
+          expect(dispatcher.unregisterEventListener).toHaveBeenCalledWith(
+            `${mockFrameId}.${eventType}`,
+            callback
+          );
+        });
+      }
+    );
   });
 });

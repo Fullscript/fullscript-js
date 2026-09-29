@@ -18,6 +18,10 @@ const App = () => {
     console.log(payload);
   };
 
+  const handleOrderCheckoutStarted = (payload: EventListenerPayload<"order.checkoutStarted">) => {
+    console.log(payload);
+  };
+
   const mountTreatmentPlan = () => {
     //     ################
     //  publicKey: fullscript-js-test-public-key-prac
@@ -40,6 +44,7 @@ const App = () => {
     feature.mount("treatment-plan-iframe");
     feature.on("treatmentPlan.activated", handleTreatmentPlanActivated);
     feature.on("patient.selected", handlePatientSelected);
+    feature.on("order.checkoutStarted", handleOrderCheckoutStarted);
   };
 
   return (
