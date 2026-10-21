@@ -132,8 +132,9 @@ describe("getFeatureUrl", () => {
   });
 
   describe("partnerSessionId", () => {
-    it("forwards it as partner_session_id for both feature types", async () => {
-      for (const featureType of ["treatmentPlan", "platform"] as const) {
+    it.each(["treatmentPlan", "platform"] as const)(
+      "forwards it as partner_session_id for %s",
+      async featureType => {
         const url = await getFeatureURL(
           featureType,
           { ...mockFeatureOptions, partnerSessionId: "visit-abc-123" },
@@ -143,6 +144,19 @@ describe("getFeatureUrl", () => {
 
         expect(new URL(url).searchParams.get("partner_session_id")).toEqual("visit-abc-123");
       }
+    );
+
+    it.each([undefined, null])("omits partner_session_id when the value is %p", async value => {
+      const url = await getFeatureURL(
+        "treatmentPlan",
+        { ...mockFeatureOptions, partnerSessionId: value },
+        mockFullscriptOptions,
+        mockFrameId
+      );
+      const params = new URL(url).searchParams;
+
+      expect(params.has("partner_session_id")).toBe(false);
+      expect(params.get("public_key")).toEqual("publicKey");
     });
 
     it("keeps the rest of the URL intact when the value has reserved characters", async () => {

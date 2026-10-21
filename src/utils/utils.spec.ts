@@ -69,6 +69,20 @@ describe("utils", () => {
       await expect(new URLSearchParams(queryString).get("foo_bar")).toEqual("a#b&c=d+e f");
     });
 
+    it("skips null and undefined params without breaking the separators", async () => {
+      mockParams = { first: undefined, foo: "bar", middle: null, baz: "qux" };
+      const queryString = await buildQueryString(mockParams);
+
+      await expect(queryString).toEqual("?foo=bar&baz=qux");
+    });
+
+    it("stringifies non-string scalar params instead of dropping them", async () => {
+      mockParams = { count: 12345, publicKey: "publicKey" };
+      const queryString = await buildQueryString(mockParams);
+
+      await expect(queryString).toEqual("?count=12345&public_key=publicKey");
+    });
+
     it("properly converts patient info to token", async () => {
       mockParams = {
         fooBar: "foobar",
