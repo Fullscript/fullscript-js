@@ -131,6 +131,51 @@ describe("getFeatureUrl", () => {
     });
   });
 
+  describe("partnerSessionId", () => {
+    it.each(["treatmentPlan", "platform"] as const)(
+      "forwards it as partner_session_id for %s",
+      async featureType => {
+        const url = await getFeatureURL(
+          featureType,
+          { ...mockFeatureOptions, partnerSessionId: "visit-abc-123" },
+          mockFullscriptOptions,
+          mockFrameId
+        );
+
+        expect(new URL(url).searchParams.get("partner_session_id")).toEqual("visit-abc-123");
+      }
+    );
+
+    it.each([undefined, null])("omits partner_session_id when the value is %p", async value => {
+      const url = await getFeatureURL(
+        "treatmentPlan",
+        { ...mockFeatureOptions, partnerSessionId: value },
+        mockFullscriptOptions,
+        mockFrameId
+      );
+      const params = new URL(url).searchParams;
+
+      expect(params.has("partner_session_id")).toBe(false);
+      expect(params.get("public_key")).toEqual("publicKey");
+    });
+
+    it("keeps the rest of the URL intact when the value has reserved characters", async () => {
+      const partnerSessionId = "visit #1&a=b+c d";
+      const url = await getFeatureURL(
+        "treatmentPlan",
+        { ...mockFeatureOptions, partnerSessionId },
+        mockFullscriptOptions,
+        mockFrameId
+      );
+      const params = new URL(url).searchParams;
+
+      expect(params.get("partner_session_id")).toEqual(partnerSessionId);
+      expect(params.get("public_key")).toEqual("publicKey");
+      expect(params.get("frame_id")).toEqual("uuid");
+      expect(params.get("target_origin")).toEqual("http://localhost");
+    });
+  });
+
   describe("custome domain", () => {
     it("returns proper custom url if domain is present", async () => {
       const customDomain = "https://staging.r.fullscript.io";

@@ -39,6 +39,7 @@ const App = () => {
         // id: "a23a465f-20db-4602-a53b-3f283d90e381",
       },
       secretToken: "qu4HsycRlJrIsjN7VWrd0LIlNoW2IjjXHv0rOHvcTPtuH9rJ",
+      partnerSessionId: "visit-abc-123",
     });
 
     feature.mount("treatment-plan-iframe");
