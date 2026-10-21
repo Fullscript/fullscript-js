@@ -61,6 +61,14 @@ describe("utils", () => {
       await expect(queryString).toEqual(`?something=else&foo[bar]=${mockParams.foo.bar}`);
     });
 
+    it("encodes reserved characters in string params", async () => {
+      mockParams = { fooBar: "a#b&c=d+e f", publicKey: "publicKey" };
+      const queryString = await buildQueryString(mockParams);
+
+      await expect(queryString).toEqual("?foo_bar=a%23b%26c%3Dd%2Be%20f&public_key=publicKey");
+      await expect(new URLSearchParams(queryString).get("foo_bar")).toEqual("a#b&c=d+e f");
+    });
+
     it("properly converts patient info to token", async () => {
       mockParams = {
         fooBar: "foobar",

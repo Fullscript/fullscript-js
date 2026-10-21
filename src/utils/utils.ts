@@ -59,7 +59,7 @@ const buildQueryString = async (params: Params): Promise<string> => {
   }
 
   return Object.keys(exposedParams).reduce((queryString, key) => {
-    let newParam = `${snakeCase(key)}=${exposedParams[key]}`;
+    let newParam = `${snakeCase(key)}=${encodeURIComponent(exposedParams[key])}`;
 
     if (typeof exposedParams[key] !== "string") {
       newParam = Object.keys(exposedParams[key]).reduce(
