@@ -59,22 +59,23 @@ const buildQueryString = async (params: Params): Promise<string> => {
   }
 
   return Object.keys(exposedParams).reduce((queryString, key) => {
-    let newParam = `${snakeCase(key)}=${exposedParams[key]}`;
+    const value = exposedParams[key];
 
-    if (typeof exposedParams[key] !== "string") {
-      newParam = Object.keys(exposedParams[key]).reduce(
-        (objectParams, attribute, currentIndex): string => {
-          const objectParam = `${snakeCase(key)}[${snakeCase(attribute)}]=${encodeURIComponent(
-            exposedParams[key][attribute]
-          )}`;
+    if (value === undefined || value === null) return queryString;
 
-          if (currentIndex === 0) {
-            return objectParam;
-          }
-          return `${objectParams}&${objectParam}`;
-        },
-        ""
-      );
+    let newParam = `${snakeCase(key)}=${encodeURIComponent(value)}`;
+
+    if (typeof value === "object") {
+      newParam = Object.keys(value).reduce((objectParams, attribute, currentIndex): string => {
+        const objectParam = `${snakeCase(key)}[${snakeCase(attribute)}]=${encodeURIComponent(
+          value[attribute]
+        )}`;
+
+        if (currentIndex === 0) {
+          return objectParam;
+        }
+        return `${objectParams}&${objectParam}`;
+      }, "");
     }
 
     if (queryString !== startingQueryString) {

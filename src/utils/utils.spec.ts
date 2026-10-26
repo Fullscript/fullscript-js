@@ -61,6 +61,28 @@ describe("utils", () => {
       await expect(queryString).toEqual(`?something=else&foo[bar]=${mockParams.foo.bar}`);
     });
 
+    it("encodes reserved characters in string params", async () => {
+      mockParams = { fooBar: "a#b&c=d+e f", publicKey: "publicKey" };
+      const queryString = await buildQueryString(mockParams);
+
+      await expect(queryString).toEqual("?foo_bar=a%23b%26c%3Dd%2Be%20f&public_key=publicKey");
+      await expect(new URLSearchParams(queryString).get("foo_bar")).toEqual("a#b&c=d+e f");
+    });
+
+    it("skips null and undefined params without breaking the separators", async () => {
+      mockParams = { first: undefined, foo: "bar", middle: null, baz: "qux" };
+      const queryString = await buildQueryString(mockParams);
+
+      await expect(queryString).toEqual("?foo=bar&baz=qux");
+    });
+
+    it("stringifies non-string scalar params instead of dropping them", async () => {
+      mockParams = { count: 12345, publicKey: "publicKey" };
+      const queryString = await buildQueryString(mockParams);
+
+      await expect(queryString).toEqual("?count=12345&public_key=publicKey");
+    });
+
     it("properly converts patient info to token", async () => {
       mockParams = {
         fooBar: "foobar",
