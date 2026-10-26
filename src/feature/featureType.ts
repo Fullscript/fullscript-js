@@ -22,7 +22,11 @@ type PatientOptions = {
   biologicalSex?: "male" | "female" | "prefer not to say";
   discount?: number;
 };
-type TreatmentPlanOptions = { patient?: PatientOptions; secretToken: string };
+type TreatmentPlanOptions = {
+  patient?: PatientOptions;
+  secretToken: string;
+  partnerSessionId?: string;
+};
 type PlatformOptions = TreatmentPlanOptions & { entrypoint?: Entrypoint };
 
 type FeatureOptions<F extends FeatureType> = F extends "treatmentPlan"
