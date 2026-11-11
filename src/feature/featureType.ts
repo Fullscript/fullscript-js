@@ -26,6 +26,7 @@ type TreatmentPlanOptions = {
   patient?: PatientOptions;
   secretToken: string;
   partnerSessionId?: string;
+  assistSessionId?: string;
 };
 type PlatformOptions = TreatmentPlanOptions & { entrypoint?: Entrypoint };
 
