@@ -176,6 +176,34 @@ describe("getFeatureUrl", () => {
     });
   });
 
+  describe("assistSessionId", () => {
+    it.each(["treatmentPlan", "platform"] as const)(
+      "forwards it as assist_session_id for %s",
+      async featureType => {
+        const assistSessionId = "3f2b8c1e-5d4a-4e7b-9a60-1c2d3e4f5a6b";
+        const url = await getFeatureURL(
+          featureType,
+          { ...mockFeatureOptions, assistSessionId },
+          mockFullscriptOptions,
+          mockFrameId
+        );
+
+        expect(new URL(url).searchParams.get("assist_session_id")).toEqual(assistSessionId);
+      }
+    );
+
+    it("leaves assist_session_id off the url when it isn't given", async () => {
+      const url = await getFeatureURL(
+        "treatmentPlan",
+        mockFeatureOptions,
+        mockFullscriptOptions,
+        mockFrameId
+      );
+
+      expect(new URL(url).searchParams.has("assist_session_id")).toBe(false);
+    });
+  });
+
   describe("custome domain", () => {
     it("returns proper custom url if domain is present", async () => {
       const customDomain = "https://staging.r.fullscript.io";
